@@ -1,0 +1,171 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" type="ball-spin-clockwise">
+  <div class="spinner-grow" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</ngx-spinner>
+<div (activate)="onActivate($event)">
+  <div>
+    <div
+      [ngStyle]="{'background-image': 'url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/' + singleData['backdrop_path'] + ')'}"
+      class="bg" *ngIf="singleData['backdrop_path']">
+      <div class="overlay pb-5 pt-5 ">
+        <div class="container text-center">
+          <div class="content row">
+            <div class="col-sm-3">
+              <div class="movie-thumb">
+                <div *ngIf="singleData['poster_path']">
+                  <img src="{{'https://image.tmdb.org/t/p/w300' + singleData['poster_path']}}"
+                       alt="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + singleData['poster_path']}}"
+                       class="card-image"
+                       onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrcqM6uaWmu08JahpGJ9z4q5NkosS0nvvQbQ&usqp=CAU'"/>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="page-content">
+                <p>
+                  <strong>{{singleData['title']}}</strong>
+                  <br/>
+                </p>
+                <p>
+                  <strong>Overview :- </strong>
+                  <br/>
+                  {{singleData['overview']}}
+                </p>
+                <p>
+                  <strong>Adult :- </strong>
+                  <small *ngIf="!singleData['adult']" class="badge bg-secondary m-1 p-1">
+
+                    No
+                    <fa-icon [icon]="faWrong" class="text-danger"></fa-icon>
+                  </small>
+                  <small *ngIf="singleData['adult']" class="badge bg-secondary m-1 p-1">
+                    Yes
+                    <fa-icon [icon]="faCorrect" class="text-success"></fa-icon>
+                  </small>
+                </p>
+                <div>
+                  <strong>
+                    User Score :-
+                  </strong>
+                  <div class="progress-wrapper">
+                    <div class="current">{{math.ceil(singleData['vote_average']) * 10}}%</div>
+                    <round-progress [responsive]="true" [current]="current" [max]="100"
+                                    [color]="'green'" [background]="'#eaeaea'" [radius]="125" [stroke]="20"
+                                    [rounded]=" true" [clockwise]="false" [duration]="800"
+                                    [animation]="'easeInOutQuart'" [animationDelay]="0" class="loading">
+                    </round-progress>
+                  </div>
+                </div>
+                <p>
+                  <strong>Users :- </strong>
+                  <span class="badge bg-secondary m-1">
+                                        {{singleData['vote_count']}}
+                                    </span>
+                </p>
+                <p>
+                  <strong>Genres :- </strong>
+                  <small>
+
+                    <small *ngFor="let x of singleData['genres']"
+                           class="badge bg-secondary m-1">
+                      {{x['name']}}
+                    </small>
+                  </small>
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="!singleData['backdrop_path']">
+    <div class="overlay">
+      <div class="container">
+        <div class="content row">
+          <div class="col-sm-3">
+            <div class="movie-thumb">
+              <div *ngIf="!singleData['backdrop_path']">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrcqM6uaWmu08JahpGJ9z4q5NkosS0nvvQbQ&usqp=CAU'"
+                  alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrcqM6uaWmu08JahpGJ9z4q5NkosS0nvvQbQ&usqp=CAU'"
+                  class="card-image"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="page-content m-4">
+              <p *ngIf="singleData['title']">
+                <strong>{{singleData['title']}}</strong>
+                <br/>
+              </p>
+              <p *ngIf="singleData['overview']">
+                <strong>Overview</strong><br/>
+                {{singleData['overview']}}
+              </p>
+              <p *ngIf="!singleData['overView']">
+                overview: <span> no data for this movies</span>
+              </p>
+              <p *ngIf="singleData['adult']">
+                <strong>adult :</strong>
+                {{singleData['adult']}}
+              </p>
+
+              <p *ngIf="singleData['genres']">
+                <strong>Genres</strong>
+              </p>
+              <div *ngFor="let x of singleData['genres']">
+                <p class="badge bg-secondary m-1">{{x['name']}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <div class="overlay">
+    <div class="container">
+      <div class="content">
+        <div class="movie-thumb">
+          <div *ngIf="!singleData['backdrop_path']">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrcqM6uaWmu08JahpGJ9z4q5NkosS0nvvQbQ&usqp=CAU'"
+              alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrcqM6uaWmu08JahpGJ9z4q5NkosS0nvvQbQ&usqp=CAU'"
+              class="card-image"/>
+          </div>
+        </div>
+        <div class="page-content m-4" *ngIf="singleData['overview']">
+          <p>
+            <strong>Overview</strong><br/>
+            {{singleData['overview']}}
+          </p>
+          <p><strong>adult :</strong>
+            {{singleData['adult']}}
+          </p>
+
+          <p>
+            <strong>Genres</strong>
+          </p>
+          <div *ngFor="let x of singleData['genres']">
+            <p>{{x['name']}}</p>
+          </div>
+        </div>
+        <div class="page-content" *ngIf="!singleData['overview']">
+          <div class="container error" *ngIf="!loading">
+            <h1> {{errorMessage && errorMessage['status']}}</h1>
+            <h2>
+              {{errorMessage && errorMessage['error'] && errorMessage['error']['status_message']}}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.search-section {
+    text-align: left;
+    float: left;
+    color: white;
+}
+
+.bg-darkblue {
+    background-color: #032541;
+
+}
+
+a,
+a:hover,
+a:active {
+    color: silver;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}
+
+#navbarDropdown {
+    color: white;
+}
+
+.dropdown-item,
+.dropdown-item:hover {
+    color: black;
+
+}

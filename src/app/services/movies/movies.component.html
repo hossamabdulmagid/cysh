@@ -1,0 +1,91 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" type="ball-spin-clockwise">
+  <div class="spinner-grow" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</ngx-spinner>
+<div class="" *ngIf="loading">
+  <div
+    [ngStyle]="{'background-image': 'url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/' + 'uozb2VeD87YmhoUP1RrGWfzuCrr.jpg' + ')'}"
+    class="bg">
+    <div class="overlay">
+      <div class="container">
+        <div class="row content">
+          <div class="col-sm-12">
+            <div class="movie-thumb">
+              <h1 class="welcome">
+                Welcome.
+              </h1>
+              <h3 class="description">
+                Millions of movies, TV shows and people to discover. Explore now.
+              </h3>
+              <h2 class="title text-center">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="input">
+
+                  <div class="container row">
+                    <div class="col-sm-12">
+                      <input id="name" formControlName="name"
+                             placeholder="Search for a movie, tv show, person......" type="search"
+                             class="input-search form-control"/>
+                      <button class="button-search" type="submit">Search</button>
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </form>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)"
+       class="container alert alert-danger text-center">
+    <div *ngIf="form.get('name')?.errors?.['required']">Field is required.</div>
+  </div>
+
+</div>
+
+<div class="collection-film d-block" (activate)="onActivate($event)" *ngIf="loading">
+  <div class="container center me-auto">
+    <div class="row">
+      <h1>
+        What's Popular
+      </h1>
+      <!-- backend doesn't support pages greater than 500-->
+      <div class="col-md-3" *ngFor="let movie of allMovies
+            | paginate
+            : {
+                itemsPerPage:itemsPerPage,
+                currentPage: page,
+                totalItems: 499
+              };">
+        <div class="card h-100 text-center">
+          <img src="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}"
+               class="card-img-top"
+               alt="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}">
+          <div class="card-body">
+            <strong class="card-title">{{movie['title']}}</strong>
+            <strong class="card-text">{{movie['original_language'] //noinspection UnresolvedVariable}}</strong>
+            <strong> {{movie['release_date']}}</strong>
+          </div>
+          <div class="card-footer">
+            <a routerLink="film/{{movie['id']}}" class=" btn btn-primary d-block">View Film</a>
+          </div>
+        </div>
+      </div>
+      <p class="section-pages">
+        <pagination-controls class="pagi" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+      </p>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loading" class="error">
+  <h1 class="error-message text-center"> {{errorMessage && errorMessage['status']}}</h1>
+  <h2 class="text-center error-message">
+    {{errorMessage && errorMessage['error'] && errorMessage['error']['status_message']}}
+  </h2>
+</div>
+
