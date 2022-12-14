@@ -11,21 +11,29 @@ import { Movie } from "./movies";
   styleUrls: ['./movies.component.css'],
 })
 export class MoviesComponent implements OnInit {
+
   allMovies: any;
+
   page: number = 1;
+
   itemsPerPage = 8;
+
   totalItems: any;
+
   search: any;
+
   errorMessage: any;
+
   loading: boolean = true;
+
   form: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
   });
   formSearch: any;
   formGroup: any;
 
-  constructor(private movies: MoviesService, private SpinnerService: NgxSpinnerService, private router: Router) {
-  }
+
+  constructor(private movies: MoviesService, private SpinnerService: NgxSpinnerService, private router: Router) {}
 
 
   ngOnInit() {
