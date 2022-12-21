@@ -23,8 +23,8 @@
                 itemsPerPage:20,
                 currentPage: page,
                 totalItems: totalItems
-              };">
-        <div class="card  h-100 text-center">
+              }; let i = index ">
+        <div class="card  h-100 text-center item" id="item{{i}}" tabindex="0">
           <div *ngIf="movie['poster_path']">
             <img src="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}"
                  alt="Image not found" class="card-img-top"/>
