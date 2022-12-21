@@ -61,22 +61,20 @@
                 itemsPerPage:itemsPerPage,
                 currentPage: page,
                 totalItems: 499
-              };">
-        <a routerLink="film/{{movie['id']}}">
-          <div class="card h-100 text-center">
-            <img src="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}"
-                 class="card-img-top"
-                 alt="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}">
-            <div class="card-body">
-              <strong class="card-title">{{movie['title']}}</strong>
-              <strong class="card-text">{{movie['original_language'] //noinspection UnresolvedVariable}}</strong>
-              <strong> {{movie['release_date']}}</strong>
-            </div>
-            <div class="card-footer">
-              <a routerLink="film/{{movie['id']}}" class=" btn btn-primary d-block">View Film</a>
-            </div>
+              };let i = index">
+        <div class="card h-100 text-center item" tabindex="0" id="item{{i}}">
+          <img src="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}"
+               class="card-img-top"
+               alt="{{'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie['poster_path']}}">
+          <div class="card-body">
+            <strong class="card-title">{{movie['title']}}</strong>
+            <strong class="card-text">{{movie['original_language'] //noinspection UnresolvedVariable}}</strong>
+            <strong> {{movie['release_date']}}</strong>
           </div>
-        </a>
+          <div class="card-footer">
+            <a routerLink="film/{{movie['id']}}" class=" btn btn-primary d-block">View Film</a>
+          </div>
+        </div>
 
       </div>
       <p class="section-pages">
