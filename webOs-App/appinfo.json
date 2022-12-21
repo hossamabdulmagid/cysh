@@ -1,0 +1,15 @@
+{
+  "id": "com.cys.app",
+  "version": "1.0.0",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "cyshapp",
+  "icon": "icon.png",
+  "uiRevision": 2,
+  
+  "requiredPermissions": [
+    "time.query",
+    "activity.operation"
+  ]
+}

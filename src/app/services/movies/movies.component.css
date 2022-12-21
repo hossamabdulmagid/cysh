@@ -364,9 +364,6 @@ strong {
 
 }
 
-@media (min-width: 1281px) {
-  /* hi-res laptops and desktops */
-}
 
 .welcome {
   color: #FFFFFF;
@@ -389,8 +386,7 @@ strong {
 
 .item:focus {
   background-color: #cf0652;
-  color: white;
-  border: .2rem solid pink;
+  color: black;
 }
 
 .item:active {
